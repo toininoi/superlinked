@@ -43,10 +43,8 @@ SIE runs as a Docker container that your code calls over HTTP. Start the contain
 
 **1. Run the engine**
 
-Pick the line that matches your machine. The `--platform linux/amd64` flag on the macOS line tells Docker to run the `linux/amd64` image under Rosetta, which is required on Apple Silicon (the image is not published for `arm64`).
-
 ```bash
-# macOS (Apple Silicon or Intel); runs the linux/amd64 image under Rosetta
+# macOS (Apple Silicon)
 docker run --platform linux/amd64 -p 8080:8080 -v sie-hf-cache:/app/.cache/huggingface ghcr.io/superlinked/sie-server:latest-cpu-default
 
 # Linux, CPU
@@ -136,5 +134,5 @@ Dense, sparse, multi-vector, vision, rerankers, extractors. All pre-configured. 
 ---
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=qdh_x-uRs9g">Watch the AI Engineer talk</a> | <a href="https://superlinked.com/docs"><strong>superlinked.com/docs</strong></a> | Apache 2.0
+  <a href="https://www.youtube.com/watch?v=qdh_x-uRs9g">Why we built SIE (AI Engineer Europe 2026)</a> | <a href="https://superlinked.com/docs"><strong>superlinked.com/docs</strong></a> | Apache 2.0
 </p>
