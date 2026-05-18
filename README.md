@@ -39,20 +39,20 @@ SIE is an open-source inference engine that serves embeddings, reranking, and en
 
 ## Quickstart
 
-SIE runs as a Docker container that your code calls over HTTP. Run the engine in one terminal, then talk to it from your app. Docker is the recommended path for local work: it ships the model runtime, CUDA bits, and dependencies as one image, so you avoid Python and driver setup.
-
-Prefer to try it in your browser without installing anything? [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/superlinked/sie/blob/main/notebooks/quickstart.ipynb)
+SIE runs as a Docker container that your code calls over HTTP. Start the container first, then install the SDK in your app and run the example below against it. Docker is the recommended path for local work: it ships the model runtime, CUDA bits, and dependencies as one image, so you avoid Python and driver setup.
 
 **1. Run the engine**
 
 ```bash
-docker run -p 8080:8080 ghcr.io/superlinked/sie-server:latest-cpu-default                # CPU
-docker run --gpus all -p 8080:8080 ghcr.io/superlinked/sie-server:latest-cuda12-default  # GPU
+docker run -p 8080:8080 -v sie-hf-cache:/app/.cache/huggingface ghcr.io/superlinked/sie-server:latest-cpu-default                # CPU
+docker run --gpus all -p 8080:8080 -v sie-hf-cache:/app/.cache/huggingface ghcr.io/superlinked/sie-server:latest-cuda12-default  # GPU
 ```
 
-First pull is around 1 GB (CPU) or 9 GB (GPU); after that the container is ready in seconds. The first call to a model also downloads weights from Hugging Face, which typically takes 30 seconds to a couple of minutes depending on model size. Subsequent calls hit a warm cache.
+The first image pull is around 1 GB (CPU) or 9 GB (GPU). After the pull, the container reaches `/readyz` in a few seconds. The `-v sie-hf-cache:/app/.cache/huggingface` flag persists model weights in a named Docker volume across runs; without it, every fresh container re-downloads them. (A named volume is preferred over a host bind-mount because the container runs as a non-root user; a bind-mount can hit UID permission issues on macOS and Windows.) The first call to a given model downloads its weights from Hugging Face on demand (typically tens of seconds to a couple of minutes depending on model size and connection); subsequent calls hit the cache and return in milliseconds. Apple Silicon users: prepend `--platform linux/amd64` (the image is `linux/amd64` only and runs under Rosetta).
 
-**2. Call it from Python**
+See the [deployment guide](https://superlinked.com/docs/deployment/docker) for GPU pinning, read-only filesystems, and tuning.
+
+**2. Call it**
 
 ```bash
 pip install sie-sdk
