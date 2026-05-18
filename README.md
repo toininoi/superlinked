@@ -48,9 +48,7 @@ docker run -p 8080:8080 -v sie-hf-cache:/app/.cache/huggingface ghcr.io/superlin
 docker run --gpus all -p 8080:8080 -v sie-hf-cache:/app/.cache/huggingface ghcr.io/superlinked/sie-server:latest-cuda12-default  # GPU
 ```
 
-The first image pull is around 1 GB (CPU) or 9 GB (GPU). After the pull, the container reaches `/readyz` in a few seconds. The `-v sie-hf-cache:/app/.cache/huggingface` flag persists model weights in a named Docker volume across runs; without it, every fresh container re-downloads them. (A named volume is preferred over a host bind-mount because the container runs as a non-root user; a bind-mount can hit UID permission issues on macOS and Windows.) The first call to a given model downloads its weights from Hugging Face on demand (typically tens of seconds to a couple of minutes depending on model size and connection); subsequent calls hit the cache and return in milliseconds. Apple Silicon users: prepend `--platform linux/amd64` (the image is `linux/amd64` only and runs under Rosetta).
-
-See the [deployment guide](https://superlinked.com/docs/deployment/docker) for GPU pinning, read-only filesystems, and tuning.
+Apple Silicon: add `--platform linux/amd64`. See the [deployment guide](https://superlinked.com/docs/deployment/docker) for GPU pinning and tuning.
 
 **2. Use SIE from Python or TypeScript**
 
@@ -59,7 +57,7 @@ pip install sie-sdk           # Python
 pnpm add @superlinked/sie-sdk # TypeScript
 ```
 
-The SDKs are small HTTP clients; they do not run any models locally. The entire API is three functions: `encode`, `score`, `extract`.
+The entire API is three functions: `encode`, `score`, `extract`.
 
 ```python
 from sie_sdk import SIEClient
@@ -92,9 +90,9 @@ print(result["entities"])
 #  {'text': 'Apple', 'label': 'organization', 'score': 0.91}]
 ```
 
-For the equivalent TypeScript example, see the [TypeScript SDK docs](https://superlinked.com/docs/reference/typescript-sdk/).
+The first call to each model downloads weights from Hugging Face (30 seconds to a few minutes); after that, calls are warm in milliseconds.
 
-See the [full quickstart guide](https://superlinked.com/docs/quickstart/) and [SDK reference](https://superlinked.com/docs/reference/sdk/).
+For the equivalent TypeScript example, see the [TypeScript SDK docs](https://superlinked.com/docs/reference/typescript-sdk/). For more, see the [full quickstart guide](https://superlinked.com/docs/quickstart/) and [SDK reference](https://superlinked.com/docs/reference/sdk/).
 
 ---
 
