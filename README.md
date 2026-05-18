@@ -14,9 +14,9 @@
 <p>85+ models. Three functions. From laptop to Kubernetes. All Apache 2.0.</p>
 
 <p>
-  <a href="https://superlinked.com/docs/">Docs</a> ·
-  <a href="https://superlinked.com/docs/quickstart/">Quickstart</a> ·
-  <a href="https://superlinked.com/docs/reference/api/">API Reference</a> ·
+  <a href="https://superlinked.com/docs/">Docs</a> |
+  <a href="https://superlinked.com/docs/quickstart/">Quickstart</a> |
+  <a href="https://superlinked.com/docs/reference/api/">API Reference</a> |
   <a href="https://superlinked.com/models">Models</a>
 </p>
 
@@ -87,9 +87,9 @@ print(result["entities"])
 #  {'text': 'Apple', 'label': 'organization', 'score': 0.91}]
 ```
 
-TypeScript: `pnpm add @superlinked/sie-sdk` · [TypeScript docs ->](https://superlinked.com/docs/reference/typescript-sdk/)
+TypeScript: `pnpm add @superlinked/sie-sdk`. See [TypeScript docs](https://superlinked.com/docs/reference/typescript-sdk/).
 
-[Full quickstart guide ->](https://superlinked.com/docs/quickstart/) · [SDK reference ->](https://superlinked.com/docs/reference/sdk/)
+See the [full quickstart guide](https://superlinked.com/docs/quickstart/) and [SDK reference](https://superlinked.com/docs/reference/sdk/).
 
 ---
 
@@ -105,7 +105,7 @@ helm upgrade --install sie-cluster oci://ghcr.io/superlinked/charts/sie-cluster 
   -f deploy/helm/sie-cluster/values-{gke|aws}.yaml
 ```
 
-[Deployment guide ->](https://superlinked.com/docs/deployment/)
+See the [deployment guide](https://superlinked.com/docs/deployment/).
 
 > **Telemetry**: SIE collects anonymous usage data (version, OS, architecture, GPU type) to understand adoption. No IP addresses, hostnames, or request data are collected. Disable with `SIE_TELEMETRY_DISABLED=1` or `DO_NOT_TRACK=1`.
 
@@ -113,10 +113,10 @@ helm upgrade --install sie-cluster oci://ghcr.io/superlinked/charts/sie-cluster 
 
 ### Explore
 
-[**85+ models**](https://superlinked.com/models): `Stella v5` · `BGE-M3` · `SPLADE v3` · `SigLIP` · `ColQwen2.5` · `BGE-reranker` · `GLiNER` · `Florence-2` · [and more ->](https://superlinked.com/models)
+[**85+ models**](https://superlinked.com/models): `Stella v5`, `BGE-M3`, `SPLADE v3`, `SigLIP`, `ColQwen2.5`, `BGE-reranker`, `GLiNER`, `Florence-2`, and [more](https://superlinked.com/models).
 Dense, sparse, multi-vector, vision, rerankers, extractors. All pre-configured. All quality-verified against MTEB in CI.
 
-[**Integrations**](https://superlinked.com/docs/integrations/): LangChain · LlamaIndex · Haystack · DSPy · CrewAI · Chroma · Qdrant · Weaviate
+[**Integrations**](https://superlinked.com/docs/integrations/): LangChain, LlamaIndex, Haystack, DSPy, CrewAI, Chroma, Qdrant, Weaviate.
 
 [**Notebooks**](notebooks/): Quickstarts and walkthroughs
 
@@ -125,5 +125,5 @@ Dense, sparse, multi-vector, vision, rerankers, extractors. All pre-configured. 
 ---
 
 <p align="center">
-  <a href="https://superlinked.com/docs"><strong>superlinked.com/docs</strong></a> · Apache 2.0
+  <a href="https://superlinked.com/docs"><strong>superlinked.com/docs</strong></a> | Apache 2.0
 </p>
